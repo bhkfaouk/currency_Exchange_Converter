@@ -21,7 +21,7 @@ public class CurrencyExchangeController {
 
     private final currencyExchangeServiceProxy proxy;
 
-@PostMapping("/convert")
+@PostMapping("/exchangeValue")
     public ResponseEntity<CurrencyResponse> getExchangeValue(@RequestBody CurrencyRequest currencyRequest) throws IOException {
 
 
@@ -29,14 +29,7 @@ log.info("request :{}",currencyRequest + " from getExchangeValue method");
      return ResponseEntity.ok(exchangeService.convertCurrency(currencyRequest));
 
 }
-    @PostMapping("/convert-feign")
-    public ResponseEntity<CurrencyResponse> getExchangeValueFeign(@RequestBody CurrencyRequest currencyRequest) throws IOException {
 
-log.info("request :{}",currencyRequest + " from getExchangeValueFeign method");
-
-        return proxy.getExchangeValue(currencyRequest);
-
-    }
 
 
 }

@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class CurrencyResponse {
+      private String message;
+
 
       private CurrencyCode targetCurrencyCode;    // The currency you want to convert to
 

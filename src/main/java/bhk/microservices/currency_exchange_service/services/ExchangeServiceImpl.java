@@ -30,18 +30,29 @@ public class ExchangeServiceImpl implements ExchangeService{
 
         Call<CurrencyExchangeApiResponse> call = myApiExchangerateApi.getExchangeRates(apiKey,currencyRequest.getSourceCurrencyCode().name());
         Response<CurrencyExchangeApiResponse> response = call.execute();
+        CurrencyResponse currencyResponse = null;
+        if(!response.isSuccessful()|| response.body() == null){
 
-        if(response.isSuccessful()){
+            return CurrencyResponse.builder()
+                    .message("Something went wrong please try later")
+                        .serverPort(Integer.parseInt(environment.getProperty("server.port")))
+                    .build();
+
+            }
+
+
+
         CurrencyExchangeApiResponse exchangeApiResponse = response.body();
-        CurrencyResponse currencyResponse = CurrencyResponse.builder()
+        return CurrencyResponse.builder()
                 .sourceCurrencyCode(currencyRequest.getSourceCurrencyCode())
                 .targetCurrencyCode(currencyRequest.getTargetCurrencyCode())
                 .targetAmountConverted(exchangeApiResponse.getConversionRate(currencyRequest.getTargetCurrencyCode()))
                 .serverPort(Integer.parseInt(environment.getProperty("server.port")))
                 .build();
-            return currencyResponse;
-        }
-        else throw new IOException("eroor in exchange currency please try later "+response.errorBody().string());
+
+
+
+
 
     }
 }

@@ -13,7 +13,6 @@ public class CurrencyRequest {
 
     private CurrencyCode sourceCurrencyCode;    // The currency you're converting from
 
-    private Double sourceAmountToConvert;      // The amount of money to be converted
 
 
 }
