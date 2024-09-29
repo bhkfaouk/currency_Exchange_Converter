@@ -44,6 +44,7 @@ public class ExchangeServiceImpl implements ExchangeService{
 
         CurrencyExchangeApiResponse exchangeApiResponse = response.body();
         return CurrencyResponse.builder()
+                .message(exchangeApiResponse.getResult())
                 .sourceCurrencyCode(currencyRequest.getSourceCurrencyCode())
                 .targetCurrencyCode(currencyRequest.getTargetCurrencyCode())
                 .targetAmountConverted(exchangeApiResponse.getConversionRate(currencyRequest.getTargetCurrencyCode()))
